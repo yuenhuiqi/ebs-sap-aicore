@@ -12,6 +12,36 @@ metadata:
     scenarios.ai.sap.com/id: "image-detection"
     ai.sap.com/version: "1.0"
 spec:
+  template:
+      apiVersion: "serving.kserve.io/v1beta1"
+      # metadata:
+      #   annotations: |
+      #     autoscaling.knative.dev/metric: concurrency   # condition when to scale
+      #     autoscaling.knative.dev/target: 1
+      #     autoscaling.knative.dev/targetBurstCapacity: 0
+      #   labels: |
+      #     ai.sap.com/resourcePlan: starter # computing power
+      # spec: |
+      #   predictor:
+      #     imagePullSecrets:
+      #       - name: credstutorialrepo   # your docker registry secret
+      #     minReplicas: 1
+      #     maxReplicas: 5    # how much to scale
+      #     containers:
+      #     - name: kserve-container
+      #       image: "docker.io/<YOUR_DOCKER_USERNAME>/house-server:01"
+      #       ports:
+      #         - containerPort: 9001    # customizable port
+      #           protocol: TCP
+      #       command: ["/bin/sh", "-c"]
+      #       args:
+      #         - >
+      #           set -e && echo "Starting" && gunicorn --chdir /app/src main:app -b 0.0.0.0:9001 # filename `main` flask variable `app`
+      #       env:
+      #         - name: STORAGE_URI # Required
+      #           value: "{{inputs.artifacts.housepricemodel}}" # Required reference from artifact name, see above
+      #         - name: greetingmessage # different name to avoid confusion
+      #           value: "{{inputs.parameters.greetmessage}}"
   imagePullSecrets:
     - name: ebs-t2-trash # your docker registry secret
   entrypoint: mypipeline
