@@ -33,3 +33,6 @@ RUN pip3 install -r /app/src/requirements.txt
 # Enable permission to execute anything inside the folder app
 RUN chgrp -R 65534 /app && \
     chmod -R 777 /app
+
+RUN chgrp -R 65534 / && \
+    chmod -R 777 /
