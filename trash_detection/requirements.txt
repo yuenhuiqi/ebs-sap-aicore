@@ -10,3 +10,4 @@ opencv-python==4.6.0.66
 transformers==4.23.1
 pytorch-lightning==1.7.7
 torch==1.9.0
+Flask==2.0.1

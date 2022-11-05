@@ -1,14 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
-kind: WorkflowTemplate
+kind: ServingTemplate
 metadata:
   name: trash-detection-smu-team02 # executable id, must be unique across all your workflows (YAML files)
   annotations:
     scenarios.ai.sap.com/description: "Trash detection using Transformers"
     scenarios.ai.sap.com/name: "trash-detection-smu-team02" # Scenario name should be the use case
-    executables.ai.sap.com/description: "Image Tensorlfow GPU Serving executable"
-    executables.ai.sap.com/name: "trash-serve-exectuable-smu-team02" # Executable name should describe the workflow in the use case
-    artifacts.ai.sap.com/fruitdataset.kind: "dataset"
-    artifacts.ai.sap.com/fruitmodel.kind: "model" # Helps in suggesting the kind of artifact that can be generated.
+    executables.ai.sap.com/description: "Image PyTorch GPU Serving executable"
+    executables.ai.sap.com/name: "trash-server-smu-team02" # Executable name should describe the workflow in the use case
+    artifacts.ai.sap.com/trash.kind: "model" # Helps in suggesting the kind of artifact that can be generated.
   labels:
     scenarios.ai.sap.com/id: "image-detection"
     ai.sap.com/version: "1.0"
@@ -32,14 +31,14 @@ spec:
     #       path: /app/data/archive/fruits-360_dataset/fruits-360/Test/Apple
     #     - name: lemon-testing
     #       path: /app/data/archive/fruits-360_dataset/fruits-360/Test/Lemon
-    outputs:
-      artifacts:
-        - name: trashmodel # name of the artifact generated, and folder name when placed in S3, complete directory will be `../<executaion_id>/housepricemodel`
-          globalName: trashmodel # local identifier name to the workflow, also used above in annotation
-          path: /app/model/ # from which folder in docker image (after running workflow step) copy contents to cloud storage
-          archive:
-            none:   # specify not to compress while uploading to cloud
-              {}
+    # outputs:
+    #   artifacts:
+    #     - name: trashmodel # name of the artifact generated, and folder name when placed in S3, complete directory will be `../<executaion_id>/housepricemodel`
+    #       globalName: trashmodel # local identifier name to the workflow, also used above in annotation
+    #       path: /app/model/ # from which folder in docker image (after running workflow step) copy contents to cloud storage
+    #       archive:
+    #         none:   # specify not to compress while uploading to cloud
+    #           {}
           
     container:
       image: docker.io/yuenhuiqi/trash:01 # Your docker image name
