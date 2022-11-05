@@ -1,4 +1,4 @@
-apiVersion: argoproj.io/v1alpha1
+apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
   name: trash-detection-smu-team02 # executable id, must be unique across all your workflows (YAML files)
