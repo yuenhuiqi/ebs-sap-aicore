@@ -6,6 +6,8 @@ from flask import request as call_request
 from transformers import DetrFeatureExtractor, DetrForObjectDetection
 import torch
 from PIL import Image
+from io import BytesIO
+import base64
 
 # Creates Flask serving engine
 app = Flask(__name__)
@@ -45,9 +47,9 @@ def detectTrash():
     global extractor
     
     query = dict(call_request.json)
-    img_path = query['imgUrl']
+    encoded_img = query['base64_img']
     
-    image = Image.open(img_path)
+    image = Image.open(BytesIO(base64.b64decode(encoded_img)))
 
     inputs = extractor(images=image, return_tensors="pt")
     outputs = model(**inputs)
