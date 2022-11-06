@@ -1,7 +1,7 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
-  name: trash-detection-smu-team02-v1 # executable id, must be unique across all your workflows (YAML files)
+  name: trash-detection-smu-team02 # executable id, must be unique across all your workflows (YAML files)
   annotations:
     scenarios.ai.sap.com/description: "Trash detection using Transformers"
     scenarios.ai.sap.com/name: "trash-detection-smu-team02" # Scenario name should be the use case
@@ -24,7 +24,7 @@ spec:
       spec: |
         predictor:
           imagePullSecrets:
-            - name: ebs-t2-trash   # your docker registry secret
+            - name: ebs-t2-aicore   # your docker registry secret
           minReplicas: 1
           maxReplicas: 5    # how much to scale
           containers:
